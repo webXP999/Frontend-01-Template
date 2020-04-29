@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    function stringToNumber(string, x) {
+        if(arguments.length < 2) {
+            x = 10;
+        }
+        var chars = string.split('');
+        var number = 0;
+        var i = 0
+        while(i < chars.length && chars[i] !== '.') {
+            number = number * x;
+            number += chars[i].codePointAt(0) - '0'.codePointAt(0);
+            i++;
+        }
+        console.log(chars[i])
+        if(chars[i] === '.') {
+            i++;
+        }
+        var fraction = 1;
+        while(i < chars.length) {
+            fraction = fraction / x;
+            number += (chars[i].codePointAt(0) - '0'.codePointAt(0)) * fraction;
+            i++;
+        }
+        return number;
+    }
+    console.log(stringToNumber('100.32222', 10))
+    console.log(parseFloat('100.32222', 10))
+
+    function numberToString(number, x) {
+        if(arguments.length < 2) {
+            x = 10
+        }
+        var integer = Math.floor(number);
+        var fraction = number - integer;
+        var string = '';
+        while(integer > 0) {
+            string = String(integer % x) + string;
+            integer = Math.floor(integer / x);
+        }
+        return string + String(fraction);
+    }
+    console.log(numberToString(100.4, 10))
+</script>
