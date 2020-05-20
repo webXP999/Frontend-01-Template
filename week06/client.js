@@ -1,4 +1,6 @@
 const net = require('net');
+const parser = require('./parser')
+
 
 class Response {
 
@@ -239,6 +241,8 @@ void async function() {
         }
     })
     let data = await request.send()
+    let dom = parser.parserHTNL(data.body)
+    console.log(JSON.stringify(dom, null, "    "))
 }()
 
 
